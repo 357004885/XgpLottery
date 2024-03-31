@@ -2,7 +2,9 @@ package cn.xgpjun.xgplottery2.gui.impl
 
 import cn.xgpjun.xgplottery2.color
 import cn.xgpjun.xgplottery2.gui.LotteryGui
+import cn.xgpjun.xgplottery2.lottery.calculator.impl.int
 import cn.xgpjun.xgplottery2.lottery.pojo.Lottery
+import cn.xgpjun.xgplottery2.manager.DatabaseManager
 import cn.xgpjun.xgplottery2.manager.Message
 import cn.xgpjun.xgplottery2.utils.MyItemBuilder
 import org.bukkit.Bukkit
@@ -40,20 +42,29 @@ class PreviewGui(val lottery: Lottery,val player: Player) :LotteryGui(null){
 
         val weightSum = lottery.getTotalWeight()
         val df = DecimalFormat(Message.DecimalFormat.get())
+        val single = lottery.calculator == "SingleGuaranteed"
+        val playerData = if (single){
+            DatabaseManager.getPlayerData(player.uniqueId)
+        }else{
+            null
+        }
         lottery.awards
             .toList()
             .slice((page - 1) * 28 until min(page*28,lottery.awards.size))
             .forEachIndexed { index,(_,award) ->
-            inv.setItem(slot[index],
-                if (lottery.showProbability){
+                val gained = (playerData?.customData?.getOrDefault("Gained-${lottery.name}-${award.name}",0)?.int() != 0)
+                val item = if (lottery.showProbability){
                     val str = if (award.weight == 0) Message.DecimalFormat.get() else df.format(award.weight.toDouble() / weightSum)
                     MyItemBuilder(award.item)
                         .addLore(Message.ShowProbability.get(str).color())
-                        .getItem()
                 }else{
                     MyItemBuilder(award.item)
-                        .getItem()
-                })
+                }
+                if (single&&gained){
+                    item.addLore(Message.Gained.get().color())
+                }
+                inv.setItem(slot[index],item.getItem())
+
         }
     }
 

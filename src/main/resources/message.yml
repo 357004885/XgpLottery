@@ -43,6 +43,7 @@ message:
   noFreeDraw: "&e你没有免费抽奖的权限"
   freeDrawTip: "&a你下次免费抽奖时间是:{time}"
   freeDraw: "&a现在可以免费抽奖！"
+  gained: "&a已抽中"
 
 help:
   help:

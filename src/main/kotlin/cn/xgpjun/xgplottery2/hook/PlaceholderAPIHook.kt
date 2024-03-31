@@ -3,10 +3,8 @@ package cn.xgpjun.xgplottery2.hook
 import cn.xgpjun.xgplottery2.color
 import cn.xgpjun.xgplottery2.listener.PlayerListener
 import cn.xgpjun.xgplottery2.manager.DatabaseManager
-import cn.xgpjun.xgplottery2.manager.DrawManager
 import cn.xgpjun.xgplottery2.manager.LotteryManager
 import cn.xgpjun.xgplottery2.manager.Message
-import cn.xgpjun.xgplottery2.send
 import cn.xgpjun.xgplottery2.utils.Config
 import me.clip.placeholderapi.PlaceholderAPI
 import me.clip.placeholderapi.expansion.PlaceholderExpansion

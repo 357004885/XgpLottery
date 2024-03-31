@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "cn.xgpjun"
-version = "2.0.2"
+version = "2.0.3"
 val nmsVersion = "1.20.1"
 
 repositories {
@@ -25,7 +25,6 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/")
     maven("https://repo.codemc.io/repository/nms/")
     maven("https://mvn.lumine.io/repository/maven-public/")
-
 }
 
 dependencies {

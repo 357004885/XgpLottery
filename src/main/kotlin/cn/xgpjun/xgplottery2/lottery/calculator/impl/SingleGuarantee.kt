@@ -18,11 +18,13 @@ class SingleGuarantee:Calculator() {
         if (guaranteedCount is Int && guaranteedCount>0 ){
             //满足保底情况
             if (nonGuaranteedCount>=guaranteedCount){
+                //可抽到的物品
                 val guaranteedList = lottery.awards.values.filter {
+                    //保底物品 且 未得到的
                     it.isGuaranteed()&&(playerData.customData.getOrDefault("Gained-${lottery.name}-${it.name}",0).int() == 0)
                 }
                 //还有没抽到的东西
-                if (guaranteedList.isEmpty()){
+                if (guaranteedList.isNotEmpty()){
                     playerData.customData["nonGuaranteed${lottery.name}"] = 0
                     val award  = guaranteedList.getAward()
                     val name = award?.name

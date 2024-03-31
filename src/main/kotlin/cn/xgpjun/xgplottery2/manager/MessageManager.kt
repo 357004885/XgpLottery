@@ -34,6 +34,7 @@ enum class Message(val path: String){
             return string.replace("{file.name}",placeholders[0].toString()).replace("{node}",placeholders[1].toString())
         }
                                      },
+    Gained("message.gained"),
     AwardNull("error.awardNull"),
     Prefix("message.prefix"),
     Success("message.success"),
