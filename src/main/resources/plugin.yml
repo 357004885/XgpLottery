@@ -9,6 +9,7 @@
     - PlaceholderAPI
     - Multiverse-Core
     - ProtocolLib
+    - NeigeItems
   commands:
     xgplottery2:
       aliases:
