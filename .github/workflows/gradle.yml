@@ -27,7 +27,13 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        
+    - name: cache gradle packages
+      uses: actions/cache@v2
+      with:
+        key: ${{ runner.os }}-build-${{ env.cache-name }}
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
     - name: Grant execute permission for Gradle
       run: chmod +x ./gradlew  # 赋予执行权限
     # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
