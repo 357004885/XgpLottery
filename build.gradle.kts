@@ -107,18 +107,19 @@ tasks.register("version") {
     }
 }
 
-val serverDir = file("D:\\桌面文件\\minecraft\\Server1.20.1")
-
-tasks.register("copyJarToFolder") {
-    dependsOn("jar") // 构建 JAR 之后执行
-    dependsOn("version")
-    doLast {
-        val jarFile = tasks.getByName("jar").outputs.files.singleFile
-        val destinationDir = File(serverDir,"plugins")
-
-        copy {
-            from(jarFile)
-            into(destinationDir)
-        }
-    }
-}
+//更新到服务端文件夹
+//val serverDir = file("D:\\桌面文件\\minecraft\\Server1.20.1")
+//
+//tasks.register("copyJarToFolder") {
+//    dependsOn("jar") // 构建 JAR 之后执行
+//    dependsOn("version")
+//    doLast {
+//        val jarFile = tasks.getByName("jar").outputs.files.singleFile
+//        val destinationDir = File(serverDir,"plugins")
+//
+//        copy {
+//            from(jarFile)
+//            into(destinationDir)
+//        }
+//    }
+//}
