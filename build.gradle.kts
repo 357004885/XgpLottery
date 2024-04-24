@@ -93,6 +93,7 @@ tasks{
     build{
         dependsOn(shadowJar)
         dependsOn("version")
+        //更新到服务端文件夹
 //        dependsOn("copyJarToFolder")
     }
 }
