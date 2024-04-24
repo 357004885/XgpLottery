@@ -54,6 +54,11 @@ jobs:
     #
     # - name: Build with Gradle 8.5
     #   run: gradle build
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Package
+        path: build/libs
 
   dependency-submission:
 
