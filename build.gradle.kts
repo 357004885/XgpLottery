@@ -93,7 +93,7 @@ tasks{
     build{
         dependsOn(shadowJar)
         dependsOn("version")
-        dependsOn("copyJarToFolder")
+//        dependsOn("copyJarToFolder")
     }
 }
 
