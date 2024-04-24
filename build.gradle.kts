@@ -25,6 +25,7 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/")
     maven("https://repo.codemc.io/repository/nms/")
     maven("https://mvn.lumine.io/repository/maven-public/")
+    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
 }
 
 dependencies {
@@ -41,7 +42,7 @@ dependencies {
         targetConfiguration = "compile"
     }
     implementation("com.google.code.gson:gson:2.9.0")
-    compileOnly("me.clip:placeholderapi:2.9.2")
+    compileOnly("me.clip:placeholderapi:2.11.1")
     compileOnly("com.github.602723113:ParticleLib:1.5.1")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.8.0")
     compileOnly("org.black_ixx:playerpoints:3.2.5")
