@@ -55,14 +55,16 @@ fun Location?.openChest() {
     this?.block?.let {
         if (AnimManager.protocolLibSupport){
             if (block.type == Material.CHEST||block.type == Material.ENDER_CHEST){
-                val pm = ProtocolLibrary.getProtocolManager()
-                val packet = pm.createPacket(PacketType.Play.Server.BLOCK_ACTION)
-                packet.blockPositionModifier.write(0, BlockPosition(it.x,it.y,it.z))
-                packet.integers.write(0,1)
-                packet.integers.write(1,1)
-                this.getNearbyPlayer(10).forEach{ player ->
-                    pm.sendServerPacket(player,packet)
-                }
+                try {
+                    val pm = ProtocolLibrary.getProtocolManager()
+                    val packet = pm.createPacket(PacketType.Play.Server.BLOCK_ACTION)
+                    packet.blockPositionModifier.write(0, BlockPosition(it.x,it.y,it.z))
+                    packet.integers.write(0,1)
+                    packet.integers.write(1,1)
+                    this.getNearbyPlayer(10).forEach{ player ->
+                        pm.sendServerPacket(player,packet)
+                    }
+                }catch (_:Exception){}
             }
         }else{
             //1.16+
