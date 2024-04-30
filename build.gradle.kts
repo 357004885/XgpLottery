@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.jetbrains.kotlin.ir.backend.js.compile
 
 plugins {
     kotlin("jvm") version "1.9.0"
@@ -38,9 +39,10 @@ dependencies {
     compileOnly("net.kyori:adventure-key:4.4.0"){
         targetConfiguration = "compile"
     }
-    compileOnly("dev.folia:folia-api:1.20.1-R0.1-SNAPSHOT") {
-        targetConfiguration = "compile"
-    }
+//    compileOnly("dev.folia:folia-api:1.20.1-R0.1-SNAPSHOT") {
+//        targetConfiguration = "compile"
+//    }
+//    compileOnly("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
     implementation("com.google.code.gson:gson:2.9.0")
     compileOnly("me.clip:placeholderapi:2.11.1")
     compileOnly("com.github.602723113:ParticleLib:1.5.1")
