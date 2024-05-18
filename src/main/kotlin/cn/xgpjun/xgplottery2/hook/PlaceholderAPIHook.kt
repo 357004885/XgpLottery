@@ -113,9 +113,7 @@ object FreeDraw:SubRequest{
         val lottery = args?.getOrNull(1)?.let {
             LotteryManager.getLottery(it)
         }?:return null
-        if (p.player?.hasPermission("xl2.freedraw.${lottery.name}.*")==false){
-            return Message.NoFreeDraw.get().color()
-        }
+
         val playerData = DatabaseManager.getPlayerData(p.uniqueId)
         val last = playerData.customData.getOrDefault("freedraw-${lottery.name}","").toString()
         if (last==""){
@@ -128,6 +126,9 @@ object FreeDraw:SubRequest{
             var duration = Duration.between(date,now)
             val minutesApart = duration.toMinutes()
             val permission = PlayerListener.getFreePermission(lottery, p.player!!)
+            if (permission == 0){
+                return Message.NoFreeDraw.get().color()
+            }
             return if (minutesApart>permission){
                 Message.FreeDraw.get().color()
             }else{

@@ -100,30 +100,28 @@ object PlayerListener:Listener {
                     if (e.player.isSneaking){
                         DrawManager.draw(e.player, it, isConsumeKeys = true, isMultiple =  true, crateLocation = block.location)
                     }else{
-                        if (e.player.hasPermission("xl2.freedraw.${it.name}.*")){
-                            val permission = getFreePermission(it, e.player)
-                            if (permission!=0&&permission!=9999999){
-                                //得到上次免费抽奖时间。
-                                val playerData = DatabaseManager.getPlayerData(e.player.uniqueId)
-                                val last = playerData.customData.getOrDefault("freedraw-${it.name}","").toString()
-                                if (last==""){
+                        val permission = getFreePermission(it, e.player)
+                        if (permission!=0&&permission!=9999999){
+                           //得到上次免费抽奖时间。
+                            val playerData = DatabaseManager.getPlayerData(e.player.uniqueId)
+                            val last = playerData.customData.getOrDefault("freedraw-${it.name}","").toString()
+                            if (last==""){
+                                //可抽奖 记录当前时间
+                                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                                playerData.customData["freedraw-${it.name}"] = LocalDateTime.now().format(formatter)
+                                DrawManager.draw(e.player, it, isConsumeKeys = false, crateLocation = block.location)
+                                return
+                            }else{
+                                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                                val date = LocalDateTime.parse(last,formatter)
+                                val now = LocalDateTime.now()
+                                val duration = Duration.between(date,now)
+                                val minutesApart = duration.toMinutes()
+                                if (minutesApart>permission){
                                     //可抽奖 记录当前时间
-                                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                                     playerData.customData["freedraw-${it.name}"] = LocalDateTime.now().format(formatter)
                                     DrawManager.draw(e.player, it, isConsumeKeys = false, crateLocation = block.location)
                                     return
-                                }else{
-                                    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                                    val date = LocalDateTime.parse(last,formatter)
-                                    val now = LocalDateTime.now()
-                                    val duration = Duration.between(date,now)
-                                    val minutesApart = duration.toMinutes()
-                                    if (minutesApart>permission){
-                                        //可抽奖 记录当前时间
-                                        playerData.customData["freedraw-${it.name}"] = LocalDateTime.now().format(formatter)
-                                        DrawManager.draw(e.player, it, isConsumeKeys = false, crateLocation = block.location)
-                                        return
-                                    }
                                 }
                             }
                         }
@@ -131,13 +129,9 @@ object PlayerListener:Listener {
                     }
                 }else{
                     MessageL.DrawTips.get(it.name, DatabaseManager.getPlayerData(e.player.uniqueId).keyCount.getOrDefault(it.virtualKeyName,0).toString()).send(e.player)
-                    if (e.player.hasPermission("xl2.freedraw.${it.name}.*")){
+                    val permission = getFreePermission(it, e.player)
+                    if (permission!=0&&permission!=9999999){
                         //获取权限,时间。
-                        val permission = getFreePermission(it, e.player)
-
-                        if (permission==0||permission==9999999){
-                            return
-                        }
                         //得到上次免费抽奖时间。
                         val playerData = DatabaseManager.getPlayerData(e.player.uniqueId)
                         val last = playerData.customData.getOrDefault("freedraw-${it.name}","").toString()

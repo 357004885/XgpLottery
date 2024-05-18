@@ -36,6 +36,9 @@ object Key :TabExecutor{
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
+        if (!sender.isOp){
+            return true
+        }
         if (args.size<3){
             help(sender)
             return true
