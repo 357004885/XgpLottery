@@ -33,12 +33,14 @@ dependencies {
     implementation(kotlin("stdlib"))
     compileOnly("net.kyori:examination-api:1.3.0")
     compileOnly("net.md-5:bungeecord-chat:1.20-R0.1")
-    compileOnly("net.kyori:adventure-api:4.14.0"){
-        targetConfiguration = "compile"
-    }
-    compileOnly("net.kyori:adventure-key:4.4.0"){
-        targetConfiguration = "compile"
-    }
+    compileOnly("net.kyori:adventure-api:4.14.0")
+//    {
+//        targetConfiguration = "compile"
+//    }
+    compileOnly("net.kyori:adventure-key:4.4.0")
+//    {
+//        targetConfiguration = "compile"
+//    }
 //    compileOnly("dev.folia:folia-api:1.20.1-R0.1-SNAPSHOT") {
 //        targetConfiguration = "compile"
 //    }
